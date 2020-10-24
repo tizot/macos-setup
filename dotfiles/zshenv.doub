@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+# Use VS Code as the visual editor
+export VISUAL='code'
+export EDITOR='code'
+export PAGER='most'
+
+# Browser
+export BROWSER='open'
+
+# Language
+if [[ -z "$LANG" ]]; then
+    export LC_ALL=en_US.UTF-8
+    export LANG='fr_FR.UTF-8'
+fi
+
+# Path
+export JAVA_HOME=`/usr/libexec/java_home -v 14.0`
+typeset -U path
+path=("$HOME/.cargo/bin" "$HOME/anaconda3/bin" "/usr/local/sbin" "$JAVA_HOME/bin" $path)
+export PATH
+
+# User
+export USER_NAME="Camille Masset"
+export USER_EMAIL="masset.camille@gmail.com"
+
+export GPG_TTY=$TTY
