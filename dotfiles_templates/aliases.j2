@@ -1,0 +1,68 @@
+# Basic
+alias ln='ln -v'
+alias md='mkdir -p'
+alias l='exa -lh'
+alias ll='exa -ahl'
+alias lh='exa -a'
+alias tlf="tail -f"
+alias mkdir='mkdir -p'
+alias vim='nvim'
+alias e="$EDITOR"
+alias v="$VISUAL"
+alias bat="PAGER=less bat"
+alias cat=bat
+alias tldr="tldr --osx --theme base16"
+
+function gi() {
+    curl -L -s https://www.gitignore.io/api/"$@" ;
+}
+function mcd() {
+    mkdir -p "$1" && cd "$1";
+}
+function cs() {
+  if [ $# -eq 0  ]; then
+    cd && ls;
+  else
+    cd "$*" && ls;
+  fi
+}
+# alias cd='cs'
+
+# Homebrew
+alias brewi='brew install'
+alias brews='brew search'
+alias cask='brew cask'
+alias caski='cask install'
+
+# Head / tail shortcuts
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g L="| wc -l"
+alias -g M="| most"
+alias -g LL="2>&1 | less"
+alias -g CA="2>&1 | cat -A"
+alias -g NE="2> /dev/null"
+alias -g NUL="> /dev/null 2>&1"
+alias -g P="2>&1| pygmentize -l pytb"
+alias -g FP="| fpp"
+alias -g ONE="| awk '{ print \$1}'"
+
+# Navigation
+alias kk='clear'
+alias ...='cd ../..'
+alias ....='cd ../../../'
+alias .....='cd ../../../..'
+
+# Pretty print the path
+path() {
+  echo $PATH | tr -s ':' '\n'
+}
+
+# Go to the root of a project (git root)
+alias root='cd $(git rev-parse --show-cdup)'
+
+# Misc.
+alias zshrc="$EDITOR ~/.zshrc"
+alias zpreztorc="$EDITOR ~/.zpreztorc"
+alias p10kconf="$EDITOR ~/.p10k.zsh"

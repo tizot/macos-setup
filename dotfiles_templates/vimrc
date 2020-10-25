@@ -1,0 +1,340 @@
+" Vim configuration - Camille Masset
+
+filetype off
+
+" Set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+Plugin 'airblade/vim-gitgutter'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'ervandew/supertab'
+Plugin 'elzr/vim-json'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'honza/vim-snippets'
+Plugin 'godlygeek/tabular'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'konfekt/fastfold'
+Plugin 'lervag/vimtex'
+Plugin 'def-lkb/ocp-indent-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'mattn/emmet-vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'nightsense/seabird'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'raimondi/delimitmate'
+Plugin 'rgrinberg/vim-ocaml'
+Plugin 'rust-lang/rust.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'sjbach/lusty'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'tmhedberg/simpylfold'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tweekmonster/django-plus.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'yggdroot/indentline'
+
+" All of your Plugins must be added before the following line
+call vundle#end()
+
+" Remove compatibility with vi
+set nocompatible
+
+" Display settings
+set title
+set number
+set relativenumber
+set ruler
+set wrap
+set showcmd
+set scrolloff=3
+set history=200
+set autoindent
+set cindent
+
+" Font
+if has("gui_running")
+  if has("gui_macvim")
+    set guifont=SourceCodePro+Powerline+Awesome\ Regular:h14
+  else
+    set guifont=Roboto\ Mono\ for\ Powerline\ 11
+  endif
+else
+  if !has("nvim")
+    set term=screen-256color
+  endif
+endif
+
+augroup vimrcEx
+au!
+
+" Relative numbers only on focus
+autocmd InsertEnter * :set rnu!
+autocmd InsertLeave * :set rnu
+
+" For all text files set 'textwidth' to 78 characters.
+autocmd FileType text setlocal textwidth=78
+
+" When editing a file, always jump to the last known cursor position.
+autocmd BufReadPost *
+\ if line("'\"") >= 1 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
+
+augroup END
+
+" Enable mouse control
+if has('mouse')
+  set mouse=a
+endif
+
+" Text edition
+set encoding=utf8
+set laststatus=2
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+" Don't expand tabs for Makefiles
+au FileType makefile setlocal noexpandtab
+
+" Backup options
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Search settings
+set ignorecase
+set smartcase
+set incsearch
+set nohlsearch
+noremap * :set hlsearch<CR>:nohlsearch<CR>*
+noremap / :set hlsearch<CR>:nohlsearch<CR>/
+noremap ? :set hlsearch<CR>:nohlsearch<CR>?
+nnoremap <F4> :set invhlsearch<CR>
+inoremap <F4> <ESC>:set invhlsearch<CR>gi
+nnoremap <CR> :set nohlsearch<CR>
+
+" Beep
+set visualbell
+set noerrorbells
+
+" Backspace classic behavior
+set backspace=indent,eol,start
+
+"Use S-enter to create new lines w/o entering insert mode
+nnoremap <S-CR> o<Esc>
+
+" Hide files when opening new ones
+set hidden
+
+" Syntax coloration
+syntax enable
+filetype on
+filetype plugin on
+filetype indent on
+
+" Solarized theme
+set background=dark
+colorscheme petrel
+
+" Deactivate directional keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Open new split panes to right and bottom, which feels more natural
+" set splitbelow
+set splitright
+
+" Auto resize Vim splits to active split
+" set winwidth=104
+" set winheight=5
+" set winminheight=5
+" set winheight=999
+
+" Remap <ESC>
+:imap ùù <Esc>
+:map ùù <Esc>
+
+" Remap leader
+let mapleader = ","
+
+" Quick save
+map <Leader>w :w<CR>
+
+""" SYSTEM CLIPBOARD COPY & PASTE SUPPORT
+set pastetoggle=<F2> "F2 before pasting to preserve indentation
+"Copy paste to/from clipboard
+vnoremap <C-c> "*y
+map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
+map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
+
+" make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" <Tab> management
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsUsePythonVersion = 3
+
+" IndentLine plugin options
+let g:indentLine_enabled = 0
+let g:indentLine_color_term = 239
+let g:indentLine_char = "┆"
+let g:indentLine_enabled = 1
+
+" Ack search through project files
+let g:ackprg = 'rg --vimgrep --no-heading'
+nmap <leader>j mA:Ack!<space>
+nmap <leader>ja mA:Ack! "<C-r>=expand("<cword>")<cr>"
+nmap <leader>jA mA:Ack! "<C-r>=expand("<cWORD>")<cr>"
+let g:ackhighlight = 1
+
+" YCM tools
+" nnoremap <Leader>gd :YcmCompleter GoTo<CR>
+
+" OCaml tools
+" let g:opamshare = substitute(system('opam config var share'),'[\r\n]*$','','')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+" au FileType ocaml setlocal softtabstop=2
+" au FileType ocaml setlocal shiftwidth=2
+" au FileType ocaml call SuperTabSetDefaultCompletionType("<c-x><c-o>")
+
+" Airline plugin options
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'tomorrow'
+let g:airline_skip_empty_sections = 1
+
+" Syntastic plugin options
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 6
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_ocaml_checkers = ['merlin']
+
+" Close current buffer without closing window
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" Ctrlp plugin options
+let g:ctrlp_extensions = ['mixed']
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_regexp = 1
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" Tagbar plugin options
+nmap <F8> :TagbarToggle<CR>
+
+" Auto expand braces on <CR>
+let g:delimitMate_expand_cr = 1
+
+" Jedi plugin options
+let g:jedi#force_py_version = 3
+
+" Javascript librairies plugin options
+let g:used_javascript_libs = 'underscore,angularjs,requirejs,chai'
+
+" NERDTree plugin options
+map <silent> <C-t> :NERDTreeToggle<cr>
+" nnoremap <C-t> :call ToggleRelativeOn()<cr>
+" Close vim if only NERDTree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Vim-Markdown plugin options
+let g:vim_markdown_math = 0
+let g:vim_json_syntax_conceal = 0
+
+" VimTeX plugin options
+let g:vimtex_enabled = 1
+let g:vimtex_fold_enabled = 1
+let g:tex_conceal = ""
+let g:vimtex_view_method = 'skim'
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-pdf',
+      \   '-bibtex',
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ]}
+let g:tex_flavor = "latex"
+
+" NERDCommenter plugin options
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimeTrailingWhitespace = 1
+
+" Emmet plugin options
+let g:user_emmet_lead_key = '<C-a>'
+
+" ctags for Rust
+let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+    \]
+    \}
+
+" Completion for Rust standard library
+" let g:ycm_rust_src_path = '/usr/local/rust/rustc-1.19.0/src'
+
+" EasyMotion options
+let g:EasyMotion_do_mapping = 0 " turn off
+omap <Leader>t <Plug>(easymotion-t)
+omap <Leader>T <Plug>(easymotion-T)
+map <Leader><Leader>s <Plug>(easymotion-s2)
+map <Leader><Leader>w <Plug>(easymotion-bd-w)
+map <Space><Space> <Plug>(easymotion-jumptoanywhere)
+map <Leader><Leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>l <Plug>(easymotion-lineforward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys='HKLYUIOPNM,QWERTZXCVBASDGJF;'
+let g:EasyMotion_use_upper = 1

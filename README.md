@@ -24,9 +24,9 @@ curl ... | bash
 - Config
     - ~~Make zsh default shell~~
     - ~~prezto~~
-    - p10k theme
-    - all dotfiles
-    - git config
+    - ~~p10k theme~~
+    - ~~all dotfiles~~
+    - ~~git config~~
     - iterm2 config
     - RSA key/GPG key
     - Apple account?
