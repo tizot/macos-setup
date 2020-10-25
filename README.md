@@ -42,7 +42,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 - Applications
     - VSCode
     - IntelliJ/PyCharm
-    - Spotify
+    - ~~Spotify~~
     - Fantastical
     - Spark Mail
     - Todoist

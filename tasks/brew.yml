@@ -48,6 +48,7 @@
 - name: Install brew casks
   community.general.homebrew_cask:
     name:
+      - alfred
       - bettertouchtool
       - brave
       - calibre
@@ -67,9 +68,11 @@
       - macdown
       - musescore
       - notion
+      - spotify
       - staruml
       - suspicious-package
       - telegram
       - virtualbox
       - virtualbox-extension-pack
+      - visual-studio-code
     state: present
