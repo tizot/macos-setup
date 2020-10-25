@@ -1,0 +1,30 @@
+---
+# - name: Set zsh as default shell
+
+- name: Install prezto
+  git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: "${ZDOTDIR:-$HOME}/.zprezto.bak"
+    recursive: yes
+
+- name: Create dotfiles folder
+  file:
+    path: "{{ playbook_dir }}/dotfiles"
+    state: directory
+
+- name: Prepare dotfiles
+  template:
+    src: "{{ item }}"
+    dest: "{{ playbook_dir }}/dotfiles/{{ item | basename | regex_replace('\\.j2$', '') }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_group }}"
+  loop: "{{ lookup('fileglob', 'dotfiles_templates/*.j2', wantlist=True) }}"
+
+- name: Link dotfiles
+  file:
+    src: "{{ item }}"
+    dest: "$HOME/.{{ item | basename }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_group }}"
+    state: link
+  loop: "{{ lookup('fileglob', 'dotfiles/*', wantlist=True) }}"
