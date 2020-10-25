@@ -33,8 +33,6 @@
       - perl
       - pinentry
       - psutils
-      - pyenv
-      - pyenv-virtualenv
       - rename
       - ripgrep
       - shellcheck

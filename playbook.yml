@@ -14,3 +14,9 @@
   tasks:
     - import_tasks: tasks/brew.yml
     - import_tasks: tasks/shell.yml
+
+  roles:
+    - role: markosamuli.pyenv
+      vars:
+        pyenv_init_shell: false
+        pyenv_global: "{{ pyenv_python38_version }} system"

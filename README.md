@@ -13,11 +13,15 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 ## Setup
 
-Copy and paste the following command in a terminal.
-It will clone the repository and execute the setup of macOS.
-```shell
-curl ... | bash
-```
+1. Clone the repository somewhere on your system (e.g. in `~/.shell-utils`).
+   ```shell
+   git clone git@github.com:tizot/macos-setup.git ~/.shell-utils/macos-setup
+   ```
+1. Configure your personal variables in the file `vars.yml`.
+1. Run the setup script.
+   ```shell
+   bash setup.sh
+   ```
 
 ## TODO
 
@@ -32,7 +36,7 @@ curl ... | bash
     - Apple account?
     - macOS config (`write defaults`)
 - Language support
-    - Python (pyenv only?)
+    - ~~Python (pyenv only?)~~
     - Node/nvm
     - Rust
 - Applications
