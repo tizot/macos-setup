@@ -22,8 +22,8 @@ curl ... | bash
 ## TODO
 
 - Config
-    - Make zsh default shell
-    - prezto
+    - ~~Make zsh default shell~~
+    - ~~prezto~~
     - p10k theme
     - all dotfiles
     - git config

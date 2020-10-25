@@ -1,5 +1,9 @@
 ---
-# - name: Set zsh as default shell
+- name: Set zsh as default shell
+  become: yes
+  user:
+    name: '{{ user_name }}'
+    shell: /bin/zsh
 
 - name: Install prezto
   git:
